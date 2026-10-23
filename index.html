@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WINBINGO Official Android APK Download</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        bingored: '#EF4444',
+                        bingoblue: '#2563EB',
+                        bingogold: '#FFD700',
+                        branddark: '#0B0F19',
+                        brandcard: 'rgba(17, 24, 39, 0.75)',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float-gentle': 'float 3.5s ease-in-out infinite',
+                        'glow-subtle': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(37, 99, 235, 0.2)' },
+                            '100%': { boxShadow: '0 0 30px rgba(255, 215, 0, 0.4)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts: Inter & Noto Sans Ethiopic for smooth Amharic rendering -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Ethiopic:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* MANDATORY ZERO-OVERFLOW SAFEGUARDS */
+        *, ::before, ::after {
+            box-sizing: border-box !important;
+        }
+        
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            font-family: 'Inter', 'Noto Sans Ethiopic', sans-serif;
+            background-color: #0B0F19;
+            color: #F3F4F6;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Glassmorphism elements styling */
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Touch-first active press state */
+        .touch-btn {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .touch-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-400 selection:text-slate-950 pb-20 sm:pb-0">
+
+    <!-- Ambient Glow Orbs -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-full h-80 bg-gradient-to-b from-blue-600/20 via-red-600/15 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <div class="fixed bottom-10 right-0 w-64 h-64 bg-amber-500/10 blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 w-full glass-nav border-b border-slate-800/80 px-3 sm:px-6 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
+            
+            <!-- Brand Logo & Name -->
+            <a href="#" class="flex items-center gap-2.5 min-w-0 group">
+                <div class="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-bingored via-bingogold to-bingoblue p-0.5 shadow-md shrink-0">
+                    <img src="winbingo.webp" 
+                         alt="WIN BINGO 77" 
+                         class="w-full h-full object-contain rounded-[10px] bg-slate-950 p-0.5"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/0B0F19/FFD700?text=WIN+77';">
+                </div>
+                <div class="truncate">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-base sm:text-lg font-black tracking-tight text-white truncate">WINBINGO</span>
+                        <span class="hidden xs:inline-block text-[9px] uppercase tracking-widest font-extrabold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">APK</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 truncate hidden xs:block" data-i18n="brand_sub">Android Game Host</p>
+                </div>
+            </a>
+
+            <!-- Right Header Actions: Language Toggle & Vercel Guide Button -->
+            <div class="flex items-center gap-2 shrink-0">
+                
+                <!-- Language Toggle -->
+                <button onclick="toggleLanguage()" 
+                        class="touch-btn min-h-[38px] px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-amber-300 border border-amber-500/30 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm">
+                    <span id="langFlag" class="text-sm">🇪🇹</span>
+                    <span id="langText" class="font-extrabold">አማርኛ</span>
+                </button>
+
+                <!-- Vercel Guide Desktop Modal Button -->
+                <!-- <button onclick="openVercelModal()" 
+                        class="hidden sm:inline-flex touch-btn min-h-[38px] px-3 py-1.5 rounded-xl bg-slate-800 text-slate-200 hover:text-white border border-slate-700/80 text-xs font-semibold items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 512 512"><path d="M256 48l256 416H0L256 48z"/></svg>
+                    <span data-i18n="nav_vercel">Vercel Guide</span>
+                </button> -->
+
+                <!-- Mobile Navigation Toggle -->
+                <button onclick="toggleMobileDrawer()" class="sm:hidden touch-btn w-10 h-10 text-slate-300 hover:text-white rounded-xl bg-slate-900 border border-slate-800">
+                    <i class="fa-solid fa-bars text-base" id="drawerIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation Overlay -->
+        <div id="mobileDrawer" class="hidden sm:hidden mt-3 pt-3 border-t border-slate-800 space-y-2 text-xs font-semibold text-slate-300">
+            <a href="#hero" onclick="toggleMobileDrawer()" class="block py-2 px-3 rounded-lg hover:bg-slate-800" data-i18n="nav_home">Home</a>
+            <a href="#features" onclick="toggleMobileDrawer()" class="block py-2 px-3 rounded-lg hover:bg-slate-800" data-i18n="nav_features">Features</a>
+            <a href="#install" onclick="toggleMobileDrawer()" class="block py-2 px-3 rounded-lg hover:bg-slate-800" data-i18n="nav_install">How to Install</a>
+            <a href="#faq" onclick="toggleMobileDrawer()" class="block py-2 px-3 rounded-lg hover:bg-slate-800" data-i18n="nav_faq">FAQ</a>
+            <button onclick="toggleMobileDrawer(); openVercelModal();" class="w-full text-left py-2 px-3 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-500/20 flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 512 512"><path d="M256 48l256 416H0L256 48z"/></svg>
+                <span data-i18n="nav_vercel">Vercel Hosting Setup</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN HERO & CONTENT -->
+    <main class="w-full max-w-full overflow-x-hidden flex-grow">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="px-4 py-6 sm:py-12 max-w-5xl mx-auto w-full">
+            
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                
+                <!-- Hero Left: Text & Primary Mobile CTA -->
+                <div class="w-full lg:w-7/12 text-center lg:text-left flex flex-col items-center lg:items-start">
+                    
+                    <!-- Safety Badge -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span class="text-[11px] font-bold text-slate-300" data-i18n="hero_badge"><i class="fa-solid fa-shield-halved text-emerald-400 me-1"></i> Official Verified APK</span>
+                    </div>
+
+                    <!-- Main Title -->
+                    <h1 class="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-tight text-white mb-3">
+                        <span class="bg-gradient-to-r from-amber-300 via-red-500 to-blue-500 bg-clip-text text-transparent" data-i18n="hero_title">
+                            Play & Win Real Prizes with Win Bingo 77!
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-sm sm:text-base text-slate-300 font-medium max-w-xl mb-6 leading-relaxed" data-i18n="hero_sub">
+                        Fast, secure and easy to play on any Android device.
+                    </p>
+
+                    <!-- Primary Interactive Download Trigger Button -->
+                    <div class="w-full max-w-md mb-6">
+                        <button onclick="startDownloadSequence()" 
+                                class="touch-btn w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-red-600 via-amber-500 to-blue-600 hover:from-red-500 hover:to-blue-500 text-slate-950 font-black text-base sm:text-lg shadow-xl shadow-amber-500/20 active:scale-95 transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-circle-down text-xl text-slate-950"></i>
+                            <span data-i18n="cta_download">Download APK</span>
+                            <span class="text-xs px-2 py-0.5 rounded-md bg-slate-950/20 font-extrabold" data-i18n="apk_size">v2.4 • 28.5 MB</span>
+                        </button>
+                        <p class="text-[11px] text-slate-400 mt-2 text-center flex items-center justify-center gap-1.5" data-i18n="direct_apk_note">
+                            <i class="fa-solid fa-bolt text-amber-400"></i> Direct winbingo.apk Download
+                        </p>
+                    </div>
+
+                    <!-- Ethiopian Local Payment Badges -->
+                    <div class="w-full max-w-md glass-panel p-3 rounded-2xl border border-slate-800 mb-6">
+                        <p class="text-[10px] uppercase font-extrabold text-slate-400 tracking-wider text-center mb-2" data-i18n="payment_title">
+                            Supported Payment Methods
+                        </p>
+                        <div class="flex items-center justify-center gap-3 flex-wrap">
+                            <span class="px-2.5 py-1 rounded-xl bg-blue-900/40 text-blue-300 border border-blue-500/30 text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-mobile-screen text-blue-400"></i> Telebirr
+                            </span>
+                            <span class="px-2.5 py-1 rounded-xl bg-purple-900/40 text-purple-300 border border-purple-500/30 text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-building-columns text-purple-400"></i> CBE Birr
+                            </span>
+                            <span class="px-2.5 py-1 rounded-xl bg-amber-900/40 text-amber-300 border border-amber-500/30 text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-money-bill-wave text-amber-400"></i> Local Banks
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Metrics Bar -->
+                    <div class="grid grid-cols-3 gap-2 w-full max-w-md text-center pt-2 border-t border-slate-800/80">
+                        <div>
+                            <p class="text-sm sm:text-base font-black text-amber-400">100K+</p>
+                            <p class="text-[10px] text-slate-400 font-medium" data-i18n="metric_downloads">Downloads</p>
+                        </div>
+                        <div>
+                            <p class="text-sm sm:text-base font-black text-amber-400">4.9 ★</p>
+                            <p class="text-[10px] text-slate-400 font-medium" data-i18n="metric_rating">User Rating</p>
+                        </div>
+                        <div>
+                            <p class="text-sm sm:text-base font-black text-emerald-400">Android 6+</p>
+                            <p class="text-[10px] text-slate-400 font-medium" data-i18n="metric_compat">Compatible</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Hero Right: Mobile Screen App Card Showcase -->
+                <div class="w-full lg:w-5/12 flex justify-center">
+                    <div class="relative w-full max-w-[280px] sm:max-w-xs glass-panel rounded-[36px] p-4 border border-slate-700/80 shadow-2xl animate-float-gentle">
+                        
+                        <!-- Top Phone Bar Notch -->
+                        <div class="w-24 h-3 bg-slate-900 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <div class="w-2 h-2 rounded-full bg-slate-800 me-1"></div>
+                            <div class="w-6 h-1 rounded-full bg-slate-800"></div>
+                        </div>
+
+                        <!-- Card Inner Body featuring winbingo.webp -->
+                        <div class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 rounded-[26px] p-4 text-center border border-slate-800 flex flex-col items-center">
+                            
+                            <!-- Logo image -->
+                            <div class="w-32 h-32 my-2 relative flex items-center justify-center">
+                                <div class="absolute inset-0 bg-amber-400/20 rounded-full blur-lg animate-pulse"></div>
+                                <img src="winbingo.webp" 
+                                     alt="WIN BINGO 77 Logo Showcase" 
+                                     class="w-full h-full object-contain relative z-10 drop-shadow-md"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/0B0F19/FFD700?text=WIN+BINGO+77';">
+                            </div>
+
+                            <h3 class="text-lg font-black text-white">WIN BINGO 77</h3>
+                            <p class="text-xs text-amber-400 font-bold mb-3" data-i18n="app_card_title">Official Game APK</p>
+
+                            <div class="w-full py-2 px-3 bg-slate-900 rounded-xl border border-slate-800 text-[11px] flex justify-between items-center mb-3">
+                                <span class="text-slate-400" data-i18n="status_room">Room #77 Live</span>
+                                <span class="text-emerald-400 font-bold flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> ONLINE
+                                </span>
+                            </div>
+
+                            <button onclick="startDownloadSequence()" class="touch-btn w-full py-2.5 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black text-xs rounded-xl shadow-md uppercase tracking-wider">
+                                <i class="fa-solid fa-download me-1.5"></i> <span data-i18n="card_btn">Get APK File</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- APP FEATURES GRID -->
+        <section id="features" class="px-4 py-10 max-w-5xl mx-auto w-full border-t border-slate-800/80">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <h2 class="text-xs uppercase font-extrabold tracking-widest text-amber-400 mb-1" data-i18n="feat_sub">Built for Entertainment</h2>
+                <h3 class="text-2xl sm:text-3xl font-black text-white" data-i18n="feat_main">Game Features</h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Feature 1 -->
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-white mb-1" data-i18n="f1_t">Fast Payouts</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" data-i18n="f1_d">Quick local cashout support via Telebirr and CBE Birr.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-white mb-1" data-i18n="f2_t">Live Bingo Rooms</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" data-i18n="f2_d">Play real-time games with hundreds of active online players.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-white mb-1" data-i18n="f3_t">Daily Bonuses</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" data-i18n="f3_d">Claim free coins, daily spin rewards, and jackpot tickets.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-white mb-1" data-i18n="f4_t">100% Safe APK</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" data-i18n="f4_d">Clean package scanned against virus and malware risks.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- HOW TO INSTALL STEP BY STEP GUIDE -->
+        <section id="install" class="px-4 py-10 bg-slate-900/50 border-y border-slate-800/80 w-full">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <h2 class="text-xs uppercase font-extrabold tracking-widest text-amber-400 mb-1" data-i18n="install_sub">Easy 3-Step Setup</h2>
+                    <h3 class="text-2xl sm:text-3xl font-black text-white" data-i18n="install_main">How to Install APK</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                    <!-- Step 1 -->
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-amber-400 text-slate-950 font-black flex items-center justify-center text-sm shrink-0">
+                            1
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white mb-1" data-i18n="s1_t">Enable Unknown Sources</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="s1_d">Allow installation from browser in phone Settings > Security.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-amber-400 text-slate-950 font-black flex items-center justify-center text-sm shrink-0">
+                            2
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white mb-1" data-i18n="s2_t">Download APK</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="s2_d">Tap the Download button to save winbingo.apk on your device.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-400 text-slate-950 font-black flex items-center justify-center text-sm shrink-0">
+                            3
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white mb-1" data-i18n="s3_t">Install & Play</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed" data-i18n="s3_d">Open the downloaded winbingo.apk file and tap Install.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE FAQ ACCORDION -->
+        <section id="faq" class="px-4 py-10 max-w-3xl mx-auto w-full">
+            <div class="text-center mb-8">
+                <h2 class="text-xs uppercase font-extrabold tracking-widest text-amber-400 mb-1" data-i18n="faq_sub">Support</h2>
+                <h3 class="text-2xl font-black text-white" data-i18n="faq_main">Frequently Asked Questions</h3>
+            </div>
+
+            <div class="space-y-3">
+                
+                <!-- FAQ 1 -->
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+                    <button onclick="toggleFaq('q1')" class="touch-btn w-full px-4 py-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-white hover:text-amber-400">
+                        <span data-i18n="q1_title">Is WIN BINGO 77 free to download?</span>
+                        <i id="icon-q1" class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+                    </button>
+                    <div id="q1" class="hidden px-4 pb-3.5 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 pt-2" data-i18n="q1_body">
+                        Yes, downloading and installing the official winbingo.apk file is completely free.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+                    <button onclick="toggleFaq('q2')" class="touch-btn w-full px-4 py-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-white hover:text-amber-400">
+                        <span data-i18n="q2_title">Does it support Telebirr and CBE Birr?</span>
+                        <i id="icon-q2" class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+                    </button>
+                    <div id="q2" class="hidden px-4 pb-3.5 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 pt-2" data-i18n="q2_body">
+                        Yes, WIN BINGO 77 supports direct local payment integrations with Telebirr and CBE Birr.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+                    <button onclick="toggleFaq('q3')" class="touch-btn w-full px-4 py-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-white hover:text-amber-400">
+                        <span data-i18n="q3_title">How do I update winbingo.apk?</span>
+                        <i id="icon-q3" class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+                    </button>
+                    <div id="q3" class="hidden px-4 pb-3.5 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 pt-2" data-i18n="q3_body">
+                        Visit this website anytime to download the newest version of winbingo.apk and install it directly over your existing app.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-slate-800/80 bg-slate-950 py-6 px-4">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2.5">
+                <img src="winbingo.webp" 
+                     alt="WIN BINGO 77 Footer Logo" 
+                     class="w-7 h-7 object-contain"
+                     onerror="this.onerror=null; this.src='https://placehold.co/80x80/0B0F19/FFD700?text=WIN+77';">
+                <span class="font-bold text-slate-300">WIN BINGO 77</span>
+                <span>&copy; 2026</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="openVercelModal()" class="hover:text-amber-400 transition-colors" data-i18n="nav_vercel">Vercel Setup Guide</button>
+                <a href="#install" class="hover:text-amber-400 transition-colors" data-i18n="nav_install">Installation</a>
+                <a href="#faq" class="hover:text-amber-400 transition-colors" data-i18n="nav_faq">FAQ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STICKY MOBILE FLOATING BOTTOM DOWNLOAD BAR -->
+    <div class="fixed bottom-0 left-0 right-0 z-30 p-2.5 glass-nav border-t border-slate-800 sm:hidden">
+        <button onclick="startDownloadSequence()" 
+                class="touch-btn w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-black text-sm shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-down text-base"></i>
+            <span data-i18n="cta_download">Download APK</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-950/20 font-extrabold">28.5 MB</span>
+        </button>
+    </div>
+
+    <!-- ANIMATED DOWNLOAD SIMULATOR MODAL -->
+    <div id="downloadModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel p-6 rounded-3xl max-w-sm w-full border border-slate-700/80 text-center shadow-2xl">
+            <div class="w-16 h-16 mx-auto mb-3">
+                <img src="winbingo.webp" 
+                     alt="WIN BINGO 77 APK" 
+                     class="w-full h-full object-contain"
+                     onerror="this.onerror=null; this.src='https://placehold.co/100x100/0B0F19/FFD700?text=WIN+77';">
+            </div>
+            <h3 class="text-base font-black text-white mb-1" data-i18n="dl_modal_title">Downloading winbingo.apk</h3>
+            <p class="text-xs text-slate-400 mb-4" data-i18n="dl_modal_sub">Please wait while your file is prepared...</p>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-900 rounded-full h-3 overflow-hidden border border-slate-800 p-0.5 mb-3">
+                <div id="modalProgressBar" class="bg-gradient-to-r from-red-500 via-amber-400 to-blue-500 h-full rounded-full w-0 transition-all duration-100"></div>
+            </div>
+            
+            <p id="modalProgressText" class="text-xs font-extrabold text-amber-400 mb-4">0%</p>
+
+            <button onclick="closeDownloadModal()" class="text-xs text-slate-400 hover:text-white underline" data-i18n="dl_cancel">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- VERCEL HOSTING SETUP INSTRUCTIONS MODAL -->
+    <div id="vercelModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-700/80 rounded-3xl p-5 sm:p-7 max-w-xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-white text-slate-950 flex items-center justify-center font-black">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 512 512"><path d="M256 48l256 416H0L256 48z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white" data-i18n="vc_title">Hosting on Vercel</h3>
+                        <p class="text-[11px] text-slate-400" data-i18n="vc_sub">Directory setup for winbingo.apk</p>
+                    </div>
+                </div>
+                <button onclick="closeVercelModal()" class="text-slate-400 hover:text-white text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs text-slate-300">
+                <p class="leading-relaxed" data-i18n="vc_intro">Place `winbingo.webp` and `winbingo.apk` inside the `public/` directory of your Vercel project:</p>
+
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <pre class="text-slate-300 font-mono text-[11px] overflow-x-auto">my-winbingo-site/
+├── public/
+│   ├── winbingo.webp    <-- Logo
+│   └── winbingo.apk     <-- APK File
+├── index.html           <-- Landing Page
+└── vercel.json          <-- Headers configuration</pre>
+                </div>
+
+                <p class="text-slate-400" data-i18n="vc_json">Include a `vercel.json` file in your root folder so browsers handle `.apk` downloads correctly:</p>
+
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <pre class="text-amber-300 font-mono text-[10px] overflow-x-auto">{
+  "headers": [
+    {
+      "source": "/winbingo.apk",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/vnd.android.package-archive"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=winbingo.apk"
+        }
+      ]
+    }
+  ]
+}</pre>
+                </div>
+            </div>
+
+            <div class="mt-5 flex justify-end">
+                <button onclick="closeVercelModal()" class="px-4 py-2 bg-amber-400 text-slate-950 font-black rounded-xl text-xs" data-i18n="vc_close">
+                    Close Guide
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT TRANSLATION DICTIONARY & LOGIC -->
+    <script>
+        /* ================= I18N BILINGUAL TRANSLATION DICTIONARY ================= */
+        const translations = {
+            en: {
+                flag: "🇺🇸",
+                lang_name: "English",
+                brand_sub: "Android Game Host",
+                nav_home: "Home",
+                nav_features: "Features",
+                nav_install: "How to Install",
+                nav_faq: "FAQ",
+                nav_vercel: "Vercel Guide",
+                hero_badge: "Official Verified APK",
+                hero_title: "Play & Win Real Prizes with Win Bingo 77!",
+                hero_sub: "Fast, secure and easy to play on any Android device.",
+                cta_download: "Download APK",
+                apk_size: "v2.4 • 28.5 MB",
+                direct_apk_note: "Direct winbingo.apk Download",
+                payment_title: "Supported Payment Methods",
+                metric_downloads: "Downloads",
+                metric_rating: "User Rating",
+                metric_compat: "Compatible",
+                app_card_title: "Official Game APK",
+                status_room: "Room #77 Live",
+                card_btn: "Get APK File",
+                feat_sub: "Built for Entertainment",
+                feat_main: "Game Features",
+                f1_t: "Fast Payouts",
+                f1_d: "Quick local cashout support via Telebirr and CBE Birr.",
+                f2_t: "Live Bingo Rooms",
+                f2_d: "Play real-time games with hundreds of active online players.",
+                f3_t: "Daily Bonuses",
+                f3_d: "Claim free coins, daily spin rewards, and jackpot tickets.",
+                f4_t: "100% Safe APK",
+                f4_d: "Clean package scanned against virus and malware risks.",
+                install_sub: "Easy 3-Step Setup",
+                install_main: "How to Install APK",
+                s1_t: "Enable Unknown Sources",
+                s1_d: "Allow installation from browser in phone Settings > Security.",
+                s2_t: "Download APK",
+                s2_d: "Tap the Download button to save winbingo.apk on your device.",
+                s3_t: "Install & Play",
+                s3_d: "Open the downloaded winbingo.apk file and tap Install.",
+                faq_sub: "Support",
+                faq_main: "Frequently Asked Questions",
+                q1_title: "Is WIN BINGO 77 free to download?",
+                q1_body: "Yes, downloading and installing the official winbingo.apk file is completely free.",
+                q2_title: "Does it support Telebirr and CBE Birr?",
+                q2_body: "Yes, WIN BINGO 77 supports direct local payment integrations with Telebirr and CBE Birr.",
+                q3_title: "How do I update winbingo.apk?",
+                q3_body: "Visit this website anytime to download the newest version of winbingo.apk and install it directly over your existing app.",
+                dl_modal_title: "Downloading winbingo.apk",
+                dl_modal_sub: "Please wait while your file is prepared...",
+                dl_cancel: "Cancel",
+                vc_title: "Hosting on Vercel",
+                vc_sub: "Directory setup for winbingo.apk",
+                vc_intro: "Place winbingo.webp and winbingo.apk inside the public/ directory of your Vercel project:",
+                vc_json: "Include a vercel.json file in your root folder so browsers handle .apk downloads correctly:",
+                vc_close: "Close Guide"
+            },
+            am: {
+                flag: "🇪🇹",
+                lang_name: "አማርኛ",
+                brand_sub: "የጨዋታ ማውረጃ ገፅ",
+                nav_home: "መነሻ",
+                nav_features: "ገፅታዎች",
+                nav_install: "አጫጫን",
+                nav_faq: "ጥያቄዎች",
+                nav_vercel: "የቨርሰል መመሪያ",
+                hero_badge: "የተረጋገጠ ኦፊሴላዊ አፕሊኬሽን",
+                hero_title: "በዊን ቢንጎ 77 ይጫወቱ እና እውነተኛ ሽልማቶችን ያሸንፉ!",
+                hero_sub: "በማንኛውም የአንድሮይድ ስልክ ላይ በፍጥነት እና ደህንነቱ በተጠበቀ ሁኔታ ይጫወቱ።",
+                cta_download: "አፕሊኬሽኑን አውርድ",
+                apk_size: "ቨርዥን 2.4 • 28.5 ሜጋባይት",
+                direct_apk_note: "የቀጥታ winbingo.apk ማውረጃ",
+                payment_title: "የሚደገፉ የክፍያ አማራጮች",
+                metric_downloads: "ወርዷል",
+                metric_rating: "የተጠቃሚ ደረጃ",
+                metric_compat: "ተስማሚ",
+                app_card_title: "ኦፊሴላዊ የጨዋታ ኤፒኬ",
+                status_room: "ክፍል #77 በቀጥታ",
+                card_btn: "ኤፒኬውን አውርድ",
+                feat_sub: "ለደስታ የተዘጋጀ",
+                feat_main: "የመተግበሪያው ገፅታዎች",
+                f1_t: "ፈጣን ክፍያ",
+                f1_d: "በቴሌብር እና ሲቢኢ ብር (CBE Birr) በቀጥታ ገንዘብዎን ያውጡ።",
+                f2_t: "የቀጥታ ቢንጎ ጨዋታዎች",
+                f2_d: "ከመቶዎች ተጫዋቾች ጋር በቀጥታ መስመር ላይ ይጫወቱ።",
+                f3_t: "የነጻ ቦነስ",
+                f3_d: "በየቀኑ ነፃ የጨዋታ ሳንቲሞች እና የጃክፖት ዕድሎችን ያግኙ።",
+                f4_t: "100% አስተማማኝ",
+                f4_d: "ከቫይረስ የጸዳ እና ደህንነቱ የተረጋገጠ አፕሊኬሽን።",
+                install_sub: "ቀላል ባለ 3-ደረጃ አጫጫን",
+                install_main: "አፕሊኬሽኑን እንዴት እንደሚጭኑ",
+                s1_t: "ያልታወቁ ምንጮችን ይፍቀዱ",
+                s1_d: "በስልክዎ መቼቶች (Settings > Security) ውስጥ ያልታወቁ ምንጮችን ይፍቀዱ።",
+                s2_t: "አፕሊኬሽኑን ያውርዱ",
+                s2_d: "የማውረጃ ቁልፉን በመጫን winbingo.apk ፋይልን ያውርዱ።",
+                s3_t: "ጭነው ይጫወቱ",
+                s3_d: "ወደወረደው winbingo.apk ፋይል በመሄድ 'Install' የሚለውን ይጫኑ።",
+                faq_sub: "እርዳታ",
+                faq_main: "ተደጋጋሚ ጥያቄዎች",
+                q1_title: "ዊን ቢንጎ 77 ማውረድ ነፃ ነው?",
+                q1_body: "አዎ፣ ኦፊሴላዊውን winbingo.apk ፋይል ማውረድ እና መጫን ሙሉ በሙሉ ነፃ ነው።",
+                q2_title: "ቴሌብርን እና ሲቢኢ ብርን ይደግፋል?",
+                q2_body: "አዎ፣ ዊን ቢንጎ 77 ከቴሌብር እና ሲቢኢ ብር ጋር በቀጥታ ይሰራል።",
+                q3_title: "winbingo.apk እንዴት ማዘመን እችላለሁ?",
+                q3_body: "ሁልጊዜም ወደዚህ ድህረ ገጽ በመመጣት አዲሱን የ winbingo.apk ስሪት ማውረድ ይችላሉ።",
+                dl_modal_title: "winbingo.apk በመወረድ ላይ ነው",
+                dl_modal_sub: "ፋይሉ እስኪዘጋጅ ድረስ ትንሽ ይጠብቁ...",
+                dl_cancel: "ሰርዝ",
+                vc_title: "በቨርሰል ላይ ማስተናገድ",
+                vc_sub: "የ winbingo.apk ፎልደር ማስተካከያ",
+                vc_intro: "winbingo.webp እና winbingo.apk ፋይሎችን በ public/ ፎልደር ውስጥ ያስቀምጡ፡",
+                vc_json: "ብራውዘሮች ኤፒኬውን በስርዓት እንዲያወርዱ vercel.json ፋይል ይፍጠሩ፡",
+                vc_close: "መመሪያውን ዝጋ"
+            }
+        };
+
+        /* ================= STATE & LANGUAGE SWITCHER ================= */
+        let currentLang = localStorage.getItem('winbingo_lang') || 'am';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('winbingo_lang', lang);
+
+            const dict = translations[lang] || translations.en;
+            
+            // Header button update
+            const langFlag = document.getElementById('langFlag');
+            const langText = document.getElementById('langText');
+            if (langFlag && langText) {
+                langFlag.innerText = lang === 'en' ? '🇪🇹' : '🇺🇸';
+                langText.innerText = lang === 'en' ? 'አማርኛ' : 'English';
+            }
+
+            // Translate all elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.innerText = dict[key];
+                }
+            });
+        }
+
+        function toggleLanguage() {
+            const nextLang = currentLang === 'en' ? 'am' : 'en';
+            applyLanguage(nextLang);
+        }
+
+        /* ================= DOWNLOAD ANIMATED MODAL SIMULATOR ================= */
+        let downloadTimer = null;
+
+        function startDownloadSequence() {
+            const modal = document.getElementById('downloadModal');
+            const bar = document.getElementById('modalProgressBar');
+            const txt = document.getElementById('modalProgressText');
+
+            if (!modal || !bar || !txt) return;
+
+            modal.classList.remove('hidden');
+            bar.style.width = '0%';
+            txt.innerText = '0%';
+
+            let progress = 0;
+            if (downloadTimer) clearInterval(downloadTimer);
+
+            downloadTimer = setInterval(() => {
+                progress += Math.floor(Math.random() * 20) + 12;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(downloadTimer);
+
+                    setTimeout(() => {
+                        // Execute direct file download
+                        triggerActualApkDownload();
+
+                        // Fire celebratory confetti
+                        if (typeof confetti === 'function') {
+                            confetti({
+                                particleCount: 90,
+                                spread: 70,
+                                origin: { y: 0.65 },
+                                colors: ['#FF3B30', '#FFD700', '#007AFF']
+                            });
+                        }
+
+                        // Auto hide modal after finish
+                        setTimeout(() => {
+                            closeDownloadModal();
+                        }, 1200);
+
+                    }, 200);
+                }
+
+                bar.style.width = `${progress}%`;
+                txt.innerText = `${progress}%`;
+            }, 120);
+        }
+
+        function triggerActualApkDownload() {
+            const link = document.createElement('a');
+            link.href = 'https://drive.google.com/file/d/1PoxUsgHAjM2vR6k4ctDaORkL5W8FjYyV/view?usp=sharing';
+            link.setAttribute('download', 'https://drive.google.com/file/d/1PoxUsgHAjM2vR6k4ctDaORkL5W8FjYyV/view?usp=sharing');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function closeDownloadModal() {
+            if (downloadTimer) clearInterval(downloadTimer);
+            const modal = document.getElementById('downloadModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        /* ================= UI INTERACTION TOGGLES ================= */
+        function toggleMobileDrawer() {
+            const drawer = document.getElementById('mobileDrawer');
+            const icon = document.getElementById('drawerIcon');
+            if (drawer) {
+                drawer.classList.toggle('hidden');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-xmark');
+                }
+            }
+        }
+
+        function toggleFaq(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
+
+            if (content) {
+                if (content.classList.contains('hidden')) {
+                    content.classList.remove('hidden');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                } else {
+                    content.classList.add('hidden');
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        function openVercelModal() {
+            const modal = document.getElementById('vercelModal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeVercelModal() {
+            const modal = document.getElementById('vercelModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            applyLanguage(currentLang);
+        });
+    </script>
+</body>
+</html>
